@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useImperativeHandle, useState } from 'react'
 
 import '../styles/tasklist.scss'
 
@@ -15,14 +15,30 @@ export function TaskList() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
   function handleCreateNewTask() {
+
+    const newTask = {
+      id: Math.floor(Math.random() * 1000),
+      title: newTaskTitle,
+      isComplete: false,
+    }
+    if (newTask.title !== ''){
+      setTasks(prevState => ([...prevState, newTask]))
+    } else {
+      alert('Algum titulo deve ser informado')
+    }
+    
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
   }
 
   function handleToggleTaskCompletion(id: number) {
+    const Task = tasks.findIndex(task => task.id === id);
+    // 
+   
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
   }
 
   function handleRemoveTask(id: number) {
+
     // Remova uma task da listagem pelo ID
   }
 
